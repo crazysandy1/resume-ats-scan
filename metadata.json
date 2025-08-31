@@ -1,0 +1,5 @@
+{
+  "name": "ATS Resume Toolkit",
+  "description": "An AI-powered resume assistant to build ATS-friendly resumes and check them against job descriptions.",
+  "requestFramePermissions": []
+}
