@@ -1,20 +1,48 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ATS Resume Toolkit
 
-# Run and deploy your AI Studio app
+An AI-powered resume assistant. Build a clean, ATS-friendly resume from a form, and check any resume against a job description to see how an Applicant Tracking System might score it.
 
-This contains everything you need to run your app locally.
+> Formerly named `resume--ats-scan`.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1W03OjbaHF9CEWLCSzz0gCoSvS0TGAVXG
+## Features
 
-## Run Locally
+- **ATS checker:** paste a resume and a job description. Gemini returns a 0-100 match score, a summary, matching keywords, missing keywords and concrete suggestions as structured JSON.
+- **Resume builder:** form for contact details, summary, work experience (title, company, dates, responsibilities) and education, with a live preview.
 
-**Prerequisites:**  Node.js
+## Tech stack
 
+React 19, TypeScript, Vite, Google Gemini (`gemini-2.5-flash` through the `@google/genai` SDK).
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Getting started
+
+Requirements: Node.js 18+ and a [Gemini API key](https://aistudio.google.com/apikey).
+
+```bash
+git clone https://github.com/crazysandy1/resume-ats-scan.git
+cd resume-ats-scan
+npm install
+echo "GEMINI_API_KEY=your_key_here" > .env.local
+npm run dev
+```
+
+Do not commit `.env.local`. The key is read in the browser build by Vite, so for a public deployment put the Gemini call behind your own small server instead of shipping the key to users.
+
+## Project layout
+
+```
+App.tsx                      App shell
+components/AtsChecker.tsx    Resume vs job-description analysis UI
+components/ResumeBuilder.tsx Resume form and preview
+services/geminiService.ts    Gemini request and response-schema validation
+types.ts, constants.ts       Shared types and defaults
+```
+
+## Roadmap
+
+- Move the Gemini call to a backend so the API key stays private.
+- PDF export for built resumes and PDF upload for the checker.
+- Multiple resume templates.
+
+## License
+
+MIT
